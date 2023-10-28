@@ -23,6 +23,7 @@ public enum Gender
 public class Player : MonoBehaviour
 {
     private IDictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
+    public List<int> itemsBought = new List<int>(); //list to store bought items
     private string playerName;
     private Gender playerGender;
     private float hospitalFee = 1500; // hospital fee per day
@@ -105,6 +106,20 @@ public class Player : MonoBehaviour
     public void Purchase(float energyLevelCutValue, float amount)
     {
         AddClockTime(0.30f);
+        playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
+
+        playerStatsDict[PlayerStats.MONEY] -= amount;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
+        StatsChecker();
+    }
+
+    public void PurchaseMallItem(float energyLevelCutValue, float amount, float happinessAddValue)
+    {
+        AddClockTime(0.30f);
+        playerStatsDict[PlayerStats.HAPPINESS] += happinessAddValue;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HAPPINESS, playerStatsDict);
+
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
 
@@ -250,7 +265,6 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Debug.Log(minutes);
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":" + minutes.ToString();
             }
