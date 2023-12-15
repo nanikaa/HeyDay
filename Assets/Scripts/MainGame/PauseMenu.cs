@@ -55,7 +55,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Home()
     {
-        AudioManager.Instance.PlaySFX("Select");
         SaveGame();
         StartCoroutine(DirectingHome());
     }
@@ -63,7 +62,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        AudioManager.Instance.PlaySFX("Select");
         pauseMenuOverlay.SetActive(false);
         GameDataManager.Instance.PlayerRecords[Player.Instance.PlayerName] = 0;
         GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
@@ -74,7 +72,6 @@ public class PauseMenu : MonoBehaviour
 
     public void SaveGame()
     {
-        AudioManager.Instance.PlaySFX("Select");
         GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
         Debugger.Instance.ShowError(GameDataManager.Instance.SaveGameStateData(GameManager.Instance.CurrentGameStateData).Item2);
     }

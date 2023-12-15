@@ -21,7 +21,6 @@ public class SwitchMenuItem : MonoBehaviour
 
    public void ShowConsumablesMenu()
    {
-      //AudioManager.Instance.PlaySFX("Select");
       menuOverlay.SetActive(true);
       OverlayAnimations.Instance.AnimOpenOverlay(menuPopUp);
       
@@ -31,7 +30,6 @@ public class SwitchMenuItem : MonoBehaviour
 
    public void HideConsumablesMenu()
    {
-      AudioManager.Instance.PlaySFX("Select");
       OverlayAnimations.Instance.AnimCloseOverlay(menuPopUp, menuOverlay);
       menuOverlay.SetActive(false);
    }  
@@ -39,7 +37,6 @@ public class SwitchMenuItem : MonoBehaviour
 
    public void NextItem()
    {
-      AudioManager.Instance.PlaySFX("Select");
       currentItem++;
 
       if (currentItem > foodList.Count - 1)
@@ -53,7 +50,6 @@ public class SwitchMenuItem : MonoBehaviour
    
    public void PreviousItem()
    {
-      AudioManager.Instance.PlaySFX("Select");
       currentItem--;
 
       if (currentItem < 0)
@@ -97,7 +93,6 @@ public class SwitchMenuItem : MonoBehaviour
 
    public void BuyItem()
    {
-      AudioManager.Instance.PlaySFX("Select");
       Player.Instance.Purchase(true, foodList[currentItem], 0.3f);
    }
 }

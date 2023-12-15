@@ -9,7 +9,6 @@ public class MallManager : MonoBehaviour
     [SerializeField] private GameObject arcadeOverlay;
     [SerializeField] private GameObject shopOptionsOverlay;
     [SerializeField] private GameObject shopBrowserOverlay;
-    [SerializeField] private GameObject shopBrowserPanel;
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private GameObject itemsHolder;
     [SerializeField] private Image mallItemHeader;
@@ -37,38 +36,17 @@ public class MallManager : MonoBehaviour
 
     public void ShowMallOverlay()
     {
-        AudioManager.Instance.PlaySFX("Select");
         mallOverlay.SetActive(true);
     }
-
-    public void ExitMallOverlay()
-    {
-        AudioManager.Instance.PlaySFX("Select");
-        mallOverlay.SetActive(false);
-    }
     
-    public void ShowMallItemBrowser()
-    {
-        AudioManager.Instance.PlaySFX("Select");
-        shopBrowserPanel.SetActive(true);
-        OverlayAnimations.Instance.AnimOpenOverlay(shopBrowserOverlay);
-        shopOptionsOverlay.SetActive(false);
-        DisplayItems();
-    }
-
-    public void HideMallItemBrowser()
-    {
-        AudioManager.Instance.PlaySFX("Select");
-        shopBrowserPanel.SetActive(false);
-        OverlayAnimations.Instance.AnimCloseOverlay(shopBrowserOverlay, shopBrowserPanel);
-        shopOptionsOverlay.SetActive(true);
-    }
 
     public void ShopAppliances()
     {
         mallItemHeader.sprite = appliancesHeader;
         mallItems = appliancesAvailable;
-        ShowMallItemBrowser();
+        shopBrowserOverlay.SetActive(true);
+        shopOptionsOverlay.SetActive(false);
+        DisplayItems();
     }
 
 
@@ -76,13 +54,14 @@ public class MallManager : MonoBehaviour
     {
         mallItemHeader.sprite = servicesHeader;
         mallItems = servicesAvailable;
-        ShowMallItemBrowser();
+        shopBrowserOverlay.SetActive(true);
+        shopOptionsOverlay.SetActive(false);
+        DisplayItems();
     }
 
 
     public void OpenArcade()
     {
-        AudioManager.Instance.PlaySFX("Select");
         arcadeOverlay.SetActive(true);
     }
 

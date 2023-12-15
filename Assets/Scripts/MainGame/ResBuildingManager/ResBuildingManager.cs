@@ -227,7 +227,6 @@ public class ResBuildingManager : MonoBehaviour
 
     public void EnterRoom(ResBuilding selectedBuilding)
     {
-        AudioManager.Instance.PlaySFX("Select");
         resBuildingSelectOverlay.SetActive(false);
         roomBgOverlay.SetActive(true);
         roomBgOverlay.GetComponent<Image>().sprite = selectedBuilding.apartmentBgImage;
@@ -239,7 +238,6 @@ public class ResBuildingManager : MonoBehaviour
 
     public void LeaveRoom()
     {
-        AudioManager.Instance.PlaySFX("Select");
         roomBgOverlay.SetActive(false);
         miniBtnsHolder.SetActive(false);
         
@@ -252,7 +250,6 @@ public class ResBuildingManager : MonoBehaviour
 
     public void ShowItems(ItemType itemType)
     {
-        AudioManager.Instance.PlaySFX("Select");
         switch (itemType)
         {
             case ItemType.VEHICLE:

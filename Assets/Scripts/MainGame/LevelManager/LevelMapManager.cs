@@ -114,7 +114,6 @@ public class LevelMapManager : MonoBehaviour
 
     public void StartNextLevel()
     {
-        AudioManager.Instance.PlaySFX("Select");
         AnimOverlayManager.Instance.StartWhiteScreenFadeLoadScreen();
         levelMapCanvas.SetActive(false);
         endLvlOverlay.SetActive(false);

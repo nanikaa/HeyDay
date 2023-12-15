@@ -8,7 +8,6 @@ public class CarCatalogueManager : MonoBehaviour
 {
     [SerializeField] private GameObject carCatalogueOverlay;
     [SerializeField] private GameObject vehicleListOverlay;
-    [SerializeField] private GameObject vehicleListPopUp;
     [SerializeField] private GameObject buyCarPopUp;
     [SerializeField] private Button buyBtn;
     [SerializeField] private TextMeshProUGUI vehicleName;
@@ -31,29 +30,14 @@ public class CarCatalogueManager : MonoBehaviour
 
     public void ShowCarCatalogue()
     {
-        AudioManager.Instance.PlaySFX("Select");
         carCatalogueOverlay.SetActive(true);
     }
 
-    public void ShowVehicleList()
-    {
-        vehicleListOverlay.SetActive(true);
-        OverlayAnimations.Instance.AnimOpenOverlay(vehicleListPopUp);
-        buyCarPopUp.SetActive(false);
-    }
-
-    public void HideVehicleList()
-    {
-        AudioManager.Instance.PlaySFX("Select");
-        vehicleListOverlay.SetActive(false);
-        OverlayAnimations.Instance.AnimHideObj(vehicleListPopUp, vehicleListOverlay);
-        buyCarPopUp.SetActive(true);
-    }
-
+    
     public void BrandNewCatalogue()
     {
-        AudioManager.Instance.PlaySFX("Select");
-        ShowVehicleList();
+        buyCarPopUp.SetActive(false);
+        vehicleListOverlay.SetActive(true);
 
         vehicleDets = brandNewVehicles;
         currentItem = 0;
@@ -64,8 +48,8 @@ public class CarCatalogueManager : MonoBehaviour
 
     public void SecondHandCatalogue()
     {
-        AudioManager.Instance.PlaySFX("Select");
-        ShowVehicleList();
+        buyCarPopUp.SetActive(false);
+        vehicleListOverlay.SetActive(true);
 
         vehicleDets = secondHandVehicles;
         currentItem = 0;
@@ -76,7 +60,6 @@ public class CarCatalogueManager : MonoBehaviour
 
     public void NextItem()
     {
-        AudioManager.Instance.PlaySFX("Select");
         currentItem++;
 
         if (currentItem > vehicleDets.Count - 1)
@@ -90,7 +73,6 @@ public class CarCatalogueManager : MonoBehaviour
 
     public void PreviousItem()
     {
-        AudioManager.Instance.PlaySFX("Select");
         currentItem--;
 
         if (currentItem < 0)
@@ -121,7 +103,6 @@ public class CarCatalogueManager : MonoBehaviour
 
     public void BuyCar() 
     {
-        AudioManager.Instance.PlaySFX("Select");
         Player.Instance.Purchase(false, vehicleDets[currentItem], 1f);
     }
 }

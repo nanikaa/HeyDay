@@ -7,8 +7,7 @@ public class OverlayAnimations : MonoBehaviour
     [SerializeField] GameObject
     goalAssignmentOverlay,
     phoneObj,
-    movieTicket,
-    barTicket;
+    menuOverlay;
 
 
     public static OverlayAnimations Instance { get; private set; }
@@ -70,16 +69,9 @@ public class OverlayAnimations : MonoBehaviour
         .setOnComplete(() => panel.SetActive(false));
     }
 
-    public void ShowMovieTicket()
+    public void ShowMenu()
     {
-        LeanTween.scale(movieTicket, new Vector3(1f,1f,1f),1f)
-        .setDelay(0.5f)
-        .setEase(LeanTweenType.easeOutElastic);
-    }
-
-    public void ShowBarTicket()
-    {
-        LeanTween.scale(barTicket, new Vector3(1f,1f,1f),1f)
+        LeanTween.scale(menuOverlay, new Vector3(1f,1f,1f),1f)
         .setDelay(0.5f)
         .setEase(LeanTweenType.easeOutElastic);
     }

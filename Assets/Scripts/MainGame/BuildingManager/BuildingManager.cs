@@ -78,7 +78,6 @@ public class BuildingManager : MonoBehaviour
 
     public void Walk()
     {
-        AudioManager.Instance.PlaySFX("Select");
         Player.Instance.Walk(5f, 3f);
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
@@ -86,13 +85,12 @@ public class BuildingManager : MonoBehaviour
         playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.WALK, ActionAnimations.WALK);
         LevelManager.onFinishedPlayerAction(MissionType.WALK);
         LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ROBBERY);
-        AudioManager.Instance.PlaySFX("Walk");
+        AudioManager.Instance.PlayMusic("Walk");
     }
 
 
     public void Ride()
     {
-        AudioManager.Instance.PlaySFX("Select");
         if (Player.Instance.PlayerOwnedVehicles.Count == 0)
         {
             if (!Player.Instance.Pay(false, 13f, 0.1f, 0f, 1f, notEnoughMoneyFare, 5f))
@@ -103,13 +101,13 @@ public class BuildingManager : MonoBehaviour
             playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.COMMUTE, ActionAnimations.COMMUTE);
             LevelManager.onFinishedPlayerAction(MissionType.COMMUTE);
             LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ACCIDENT);
-            AudioManager.Instance.PlaySFX("Commute");
+            AudioManager.Instance.PlayMusic("Commute");
         }
         else
         {
             Player.Instance.Pay(false, 0f, 0.05f, 0f, 0.5f, notEnoughMoneyFare, 2f);
             playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.DRIVE, ActionAnimations.DRIVE);
-            AudioManager.Instance.PlaySFX("Drive");
+            AudioManager.Instance.PlayMusic("Drive");
         }
 
         walkBtn.SetActive(false);
@@ -120,7 +118,6 @@ public class BuildingManager : MonoBehaviour
 
     public void EnterBuilding(Building selectedBuilding)
     {
-        AudioManager.Instance.PlaySFX("Select");
         GameUiController.onScreenOverlayChanged(UIactions.SHOW_SMALL_BOTTOM_OVERLAY);
 
         if (selectedBuilding.buildingEnumName == Buildings.RESIDENTIAL)
@@ -134,11 +131,6 @@ public class BuildingManager : MonoBehaviour
             PrepareNpc();
         }
 
-        if (selectedBuilding.bbuildingBgSound)
-        {
-            AudioManager.Instance.PlayMusicEffect(selectedBuilding.bbuildingBgSound);
-        }
-        
         LevelManager.onFinishedPlayerAction(MissionType.VISIT, interactedBuilding:selectedBuilding.buildingEnumName);
     }
 
@@ -146,7 +138,6 @@ public class BuildingManager : MonoBehaviour
     public void ExitBuilding()
     {
         AudioManager.Instance.StopMusicEffect();
-        AudioManager.Instance.PlaySFX("Select");
         RemoveBuildingActionBtns();
         RemoveNpc();
         UniversityManager.Instance.OnExitedUniversity();
@@ -221,7 +212,6 @@ public class BuildingManager : MonoBehaviour
 
     public void EnterResidentialArea()
     {
-        AudioManager.Instance.PlaySFX("Select");
         GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_SMALL_BOTTOM_OVERLAY);
         buildingSelectOverlay.SetActive(false);
         resViewHUD.SetActive(true);
@@ -238,7 +228,6 @@ public class BuildingManager : MonoBehaviour
 
     public void ExitResidential()
     {
-        AudioManager.Instance.PlaySFX("Select");
         ResBuildingManager.Instance.ResBuildingSelectOverlay.SetActive(false);
         GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         camera1.SetActive(true);
@@ -285,16 +274,12 @@ public class BuildingManager : MonoBehaviour
 
     public void OpenCinemaOverlay()
     {
-        AudioManager.Instance.PlaySFX("Select");
         cinemaOverlay.SetActive(true);
-        OverlayAnimations.Instance.ShowMovieTicket();
     }
 
 
     public void OpenBarOverlay()
     {
-        AudioManager.Instance.PlaySFX("Select");
         barOverlay.SetActive(true);
-        OverlayAnimations.Instance.ShowBarTicket();
     }
 }

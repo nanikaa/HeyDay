@@ -43,7 +43,6 @@ public class MallItem : MonoBehaviour
 
     private void BuyItem()
     {
-        AudioManager.Instance.PlaySFX("Select");
         Player.Instance.Purchase(false, itemObj, 0.3f,5f);
     }
 }
